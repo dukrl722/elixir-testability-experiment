@@ -1,0 +1,38 @@
+==> compiling (test env)
+==> credo
+==> dialyzer (the first run builds the PLT and takes a few minutes)
+==> pure: test suite
+==> pure: coverage
+==> pure: mutation testing (this takes a few minutes)
+==> pure: seeded defects
+    01_bulk_discount_threshold: detected
+    02_coupon_stacking: detected
+    03_shipping_region_boundary: detected
+    04_free_shipping_base: detected
+    05_happy_hour_boundary: detected
+    06_negative_total: detected
+    07_stock_not_released_on_error: missed
+    08_notification_cancels_order: detected
+    09_reserve_before_coupon_check: missed
+    10_early_rounding: detected
+==> pure: timing 10 suite runs
+==> mixed: test suite
+==> mixed: coverage
+==> mixed: mutation testing (this takes a few minutes)
+==> mixed: seeded defects
+    01_bulk_discount_threshold: detected
+    02_coupon_stacking: detected
+    03_shipping_region_boundary: detected
+    04_free_shipping_base: detected
+    05_happy_hour_boundary: detected
+    06_negative_total: detected
+    07_stock_not_released_on_error: detected
+    08_notification_cancels_order: detected
+    09_reserve_before_coupon_check: detected
+    10_early_rounding: detected
+==> mixed: timing 10 suite runs
+==> wrote results/metrics.csv
+variant,business_loc,test_loc,unit_tests,integration_tests,property_tests,mock_count,line_coverage,mutation_score,defects_detected,suite_time_ms,credo_issues,dialyzer_warnings
+pure,149,223,26,5,5,4,89.04,0.878,8,123.72,0,0
+mixed,143,297,35,0,5,31,100.0,1.0,10,152.04,0,0
+

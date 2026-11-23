@@ -1,0 +1,11 @@
+--- a/lib/shop/pure/pricing.ex
++++ b/lib/shop/pure/pricing.ex
+@@ -28,7 +28,7 @@
+   def shipping(order, _discounted), do: region_rate(order.zip_code)
+ 
+   def apply_happy_hour(amount, hour) do
+-    if hour < @happy_hour_end do
++    if hour <= @happy_hour_end do
+       max(amount - @happy_hour_discount, 0)
+     else
+       amount

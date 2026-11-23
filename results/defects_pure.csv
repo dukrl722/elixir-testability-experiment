@@ -1,0 +1,11 @@
+defect,detected
+01_bulk_discount_threshold,true
+02_coupon_stacking,true
+03_shipping_region_boundary,true
+04_free_shipping_base,true
+05_happy_hour_boundary,true
+06_negative_total,true
+07_stock_not_released_on_error,false
+08_notification_cancels_order,true
+09_reserve_before_coupon_check,false
+10_early_rounding,true

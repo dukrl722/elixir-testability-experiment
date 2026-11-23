@@ -1,0 +1,11 @@
+--- a/lib/shop/mixed/orders.ex
++++ b/lib/shop/mixed/orders.ex
+@@ -57,7 +57,7 @@
+ 
+       {:error, reason} ->
+         Logger.warning("Failed to notify #{order.customer_id}: #{inspect(reason)}")
+-        {:ok, order}
++        {:error, {:notification_failed, reason}}
+     end
+   end
+ 

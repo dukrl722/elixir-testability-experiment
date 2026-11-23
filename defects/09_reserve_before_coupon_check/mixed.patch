@@ -1,0 +1,15 @@
+--- a/lib/shop/mixed/orders.ex
++++ b/lib/shop/mixed/orders.ex
+@@ -7,9 +7,10 @@
+     order = %{order | created_at: order.created_at || effects.now.()}
+ 
+     with :ok <- Validation.validate_status(order),
+-         :ok <- Validation.validate(order),
++         :ok <- Validation.validate(%{order | coupon: nil}),
+          :ok <- Validation.check_stock(order.items, effects),
+-         {:ok, reserved} <- reserve(Validation.required_stock(order.items), [], effects) do
++         {:ok, reserved} <- reserve(Validation.required_stock(order.items), [], effects),
++         :ok <- Validation.validate(order) do
+       total = Pricing.calculate(order, effects)
+       charge(%{order | status: :reserved, total: total}, reserved, effects)
+     end

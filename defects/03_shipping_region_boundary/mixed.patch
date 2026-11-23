@@ -1,0 +1,13 @@
+--- a/lib/shop/mixed/pricing.ex
++++ b/lib/shop/mixed/pricing.ex
+@@ -38,8 +38,8 @@
+   # The shipping rate depends on the first digit of the zip code.
+   defp region_rate(zip_code) do
+     case String.first(zip_code) do
+-      digit when digit in ["0", "1", "2", "3"] -> 1500
+-      digit when digit in ["4", "5", "6"] -> 2500
++      digit when digit in ["0", "1", "2"] -> 1500
++      digit when digit in ["3", "4", "5", "6"] -> 2500
+       _other -> 3500
+     end
+   end

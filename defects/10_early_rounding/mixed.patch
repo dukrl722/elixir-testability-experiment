@@ -1,0 +1,11 @@
+--- a/lib/shop/mixed/pricing.ex
++++ b/lib/shop/mixed/pricing.ex
+@@ -8,7 +8,7 @@
+ 
+   def calculate(order, effects) do
+     percent = discount_percent(order)
+-    discounted = round(subtotal(order.items) * (100 - percent) / 100)
++    discounted = round(subtotal(order.items) * (100 - percent) / 10_000) * 100
+     amount = discounted + shipping(order, discounted)
+     apply_happy_hour(amount, order, effects)
+   end

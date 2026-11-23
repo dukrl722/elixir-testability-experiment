@@ -1,0 +1,11 @@
+--- a/lib/shop/mixed/pricing.ex
++++ b/lib/shop/mixed/pricing.ex
+@@ -20,7 +20,7 @@
+   end
+ 
+   def discount_percent(order) do
+-    max(bulk_percent(order.items), coupon_percent(order.coupon))
++    bulk_percent(order.items) + coupon_percent(order.coupon)
+   end
+ 
+   def shipping(%{coupon: "FREESHIP"}, _discounted), do: 0

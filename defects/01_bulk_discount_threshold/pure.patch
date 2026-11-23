@@ -1,0 +1,9 @@
+--- a/lib/shop/pure/pricing.ex
++++ b/lib/shop/pure/pricing.ex
+@@ -1,5 +1,5 @@
+ defmodule Shop.Pure.Pricing do
+-  @bulk_units 10
++  @bulk_units 9
+   @bulk_percent 5
+   @coupon_percent 10
+   @free_shipping_above 30_000

@@ -1,0 +1,11 @@
+--- a/lib/shop/mixed/pricing.ex
++++ b/lib/shop/mixed/pricing.ex
+@@ -49,7 +49,7 @@
+     created_at = order.created_at || effects.now.()
+ 
+     if created_at.hour < @happy_hour_end do
+-      max(amount - @happy_hour_discount, 0)
++      amount - @happy_hour_discount
+     else
+       amount
+     end

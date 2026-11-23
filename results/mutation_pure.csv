@@ -1,0 +1,42 @@
+file,line,operator,original,mutated,status
+lib/shop/pure/orders.ex,25,remove_clause,"def cancel(%{status: :new} = order, _effects), do: {:ok, %{order | status: :cancelled}}",(removed lines 25-25),survived
+lib/shop/pure/orders.ex,27,remove_clause,"def cancel(%{status: :reserved} = order, effects) do",(removed lines 27-30),killed
+lib/shop/pure/orders.ex,32,remove_clause,"def cancel(%{status: :paid}, _effects), do: {:error, :already_paid}",(removed lines 32-32),survived
+lib/shop/pure/orders.ex,33,remove_clause,"def cancel(%{status: :cancelled}, _effects), do: {:error, :already_cancelled}",(removed lines 33-33),survived
+lib/shop/pure/orders.ex,43,remove_clause,"defp reserve([], reserved, _effects), do: {:ok, reserved}",(removed lines 43-43),killed
+lib/shop/pure/orders.ex,45,remove_clause,"defp reserve([{sku, quantity} | rest], reserved, effects) do",(removed lines 45-50),killed
+lib/shop/pure/orders.ex,47,remove_clause,":ok -> reserve(rest, [{sku, quantity} | reserved], effects)",(removed lines 47-47),killed
+lib/shop/pure/orders.ex,48,remove_clause,"{:error, _reason} -> release_and_fail(reserved, {:out_of_stock, sku}, effects)",(removed lines 48-48),survived
+lib/shop/pure/orders.ex,54,remove_clause,":approved -> notify(%{order | status: :paid}, effects)",(removed lines 54-54),killed
+lib/shop/pure/orders.ex,55,remove_clause,":declined -> release_and_fail(reserved, :payment_declined, effects)",(removed lines 55-55),killed
+lib/shop/pure/orders.ex,56,remove_clause,"{:error, reason} -> release_and_fail(reserved, {:payment_failed, reason}, effects)",(removed lines 56-56),survived
+lib/shop/pure/orders.ex,65,remove_clause,:ok ->,(removed lines 65-67),killed
+lib/shop/pure/orders.ex,68,remove_clause,"{:error, reason} ->",(removed lines 68-70),killed
+lib/shop/pure/pricing.ex,2,zero_constant,@bulk_units 10,@bulk_units 0,killed
+lib/shop/pure/pricing.ex,3,zero_constant,@bulk_percent 5,@bulk_percent 0,killed
+lib/shop/pure/pricing.ex,4,zero_constant,@coupon_percent 10,@coupon_percent 0,killed
+lib/shop/pure/pricing.ex,5,zero_constant,@free_shipping_above 30_000,@free_shipping_above 0,killed
+lib/shop/pure/pricing.ex,6,zero_constant,@happy_hour_discount 500,@happy_hour_discount 0,killed
+lib/shop/pure/pricing.ex,7,zero_constant,@happy_hour_end 6,@happy_hour_end 0,killed
+lib/shop/pure/pricing.ex,12,plus_to_minus,"amount = discounted + shipping(order, discounted)","amount = discounted - shipping(order, discounted)",killed
+lib/shop/pure/pricing.ex,26,remove_clause,"def shipping(%{coupon: ""FREESHIP""}, _discounted), do: 0",(removed lines 26-26),killed
+lib/shop/pure/pricing.ex,27,gt_to_gte,"def shipping(_order, discounted) when discounted > @free_shipping_above, do: 0","def shipping(_order, discounted) when discounted >= @free_shipping_above, do: 0",killed
+lib/shop/pure/pricing.ex,27,remove_clause,"def shipping(_order, discounted) when discounted > @free_shipping_above, do: 0",(removed lines 27-27),killed
+lib/shop/pure/pricing.ex,28,remove_clause,"def shipping(order, _discounted), do: region_rate(order.zip_code)",(removed lines 28-28),killed
+lib/shop/pure/pricing.ex,31,lt_to_lte,if hour < @happy_hour_end do,if hour <= @happy_hour_end do,killed
+lib/shop/pure/pricing.ex,43,remove_clause,"defp coupon_percent(""SAVE10""), do: @coupon_percent",(removed lines 43-43),killed
+lib/shop/pure/pricing.ex,44,remove_clause,"defp coupon_percent(_other), do: 0",(removed lines 44-44),killed
+lib/shop/pure/pricing.ex,49,remove_clause,"digit when digit in [""0"", ""1"", ""2"", ""3""] -> 1500",(removed lines 49-49),killed
+lib/shop/pure/pricing.ex,50,remove_clause,"digit when digit in [""4"", ""5"", ""6""] -> 2500",(removed lines 50-50),killed
+lib/shop/pure/pricing.ex,51,remove_clause,_other -> 3500,(removed lines 51-51),killed
+lib/shop/pure/stock.ex,10,lt_to_lte,"case Enum.find(needed, fn {sku, quantity} -> Map.get(available, sku, 0) < quantity end) do","case Enum.find(needed, fn {sku, quantity} -> Map.get(available, sku, 0) <= quantity end) do",killed
+lib/shop/pure/stock.ex,11,remove_clause,nil -> :ok,(removed lines 11-11),killed
+lib/shop/pure/stock.ex,12,remove_clause,"{sku, _quantity} -> {:error, {:out_of_stock, sku}}",(removed lines 12-12),killed
+lib/shop/pure/validation.ex,4,remove_clause,"def validate_status(%{status: :new}), do: :ok",(removed lines 4-4),killed
+lib/shop/pure/validation.ex,5,remove_clause,"def validate_status(%{status: status}), do: {:error, {:invalid_status, status}}",(removed lines 5-5),killed
+lib/shop/pure/validation.ex,9,remove_clause,"order.items == [] -> {:error, :empty_order}",(removed lines 9-9),killed
+lib/shop/pure/validation.ex,10,remove_clause,"not Enum.all?(order.items, &valid_item?/1) -> {:error, :invalid_items}",(removed lines 10-10),killed
+lib/shop/pure/validation.ex,11,remove_clause,"order.coupon not in @valid_coupons -> {:error, :invalid_coupon}",(removed lines 11-11),killed
+lib/shop/pure/validation.ex,12,remove_clause,"not valid_zip_code?(order.zip_code) -> {:error, :invalid_zip_code}",(removed lines 12-12),killed
+lib/shop/pure/validation.ex,13,remove_clause,true -> :ok,(removed lines 13-13),killed
+lib/shop/pure/validation.ex,18,gt_to_gte,is_binary(item.sku) and is_integer(item.quantity) and item.quantity > 0 and,is_binary(item.sku) and is_integer(item.quantity) and item.quantity >= 0 and,killed

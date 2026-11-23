@@ -1,0 +1,11 @@
+--- a/lib/shop/pure/orders.ex
++++ b/lib/shop/pure/orders.ex
+@@ -53,7 +53,7 @@
+     case effects.charge.(order.customer_id, order.total) do
+       :approved -> notify(%{order | status: :paid}, effects)
+       :declined -> release_and_fail(reserved, :payment_declined, effects)
+-      {:error, reason} -> release_and_fail(reserved, {:payment_failed, reason}, effects)
++      {:error, reason} -> {:error, {:payment_failed, reason}}
+     end
+   end
+ 

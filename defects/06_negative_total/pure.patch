@@ -1,0 +1,11 @@
+--- a/lib/shop/pure/pricing.ex
++++ b/lib/shop/pure/pricing.ex
+@@ -29,7 +29,7 @@
+ 
+   def apply_happy_hour(amount, hour) do
+     if hour < @happy_hour_end do
+-      max(amount - @happy_hour_discount, 0)
++      amount - @happy_hour_discount
+     else
+       amount
+     end

@@ -1,0 +1,11 @@
+--- a/lib/shop/pure/pricing.ex
++++ b/lib/shop/pure/pricing.ex
+@@ -8,7 +8,7 @@
+ 
+   def total(order, hour) do
+     percent = discount_percent(order)
+-    discounted = round(subtotal(order.items) * (100 - percent) / 100)
++    discounted = round(subtotal(order.items) * (100 - percent) / 10_000) * 100
+     amount = discounted + shipping(order, discounted)
+     apply_happy_hour(amount, hour)
+   end

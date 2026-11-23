@@ -1,0 +1,11 @@
+--- a/lib/shop/mixed/pricing.ex
++++ b/lib/shop/mixed/pricing.ex
+@@ -48,7 +48,7 @@
+   defp apply_happy_hour(amount, order, effects) do
+     created_at = order.created_at || effects.now.()
+ 
+-    if created_at.hour < @happy_hour_end do
++    if created_at.hour <= @happy_hour_end do
+       max(amount - @happy_hour_discount, 0)
+     else
+       amount
